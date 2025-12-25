@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOKEN EARIN - 3D Metaverse Hub</title>
+    <!-- SEO & Monetization -->
+    <meta name="monetag" content="c0d203191fae9c68104d6321a2eb14e1">
+    
+    <!-- Ad Scripts -->
+    <script src='//libtl.com/sdk.js' data-zone='10120546' data-sdk='show_10120546'></script>
+    <script>(function(s){s.dataset.zone='10156479',s.src='https://forfrogadiertor.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --primary: #fbbf24;
+        --surface: #0f172a;
+      }
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        background: #020617;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      
+      .mesh-bg {
+        position: fixed;
+        inset: 0;
+        background-image: 
+          radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+          radial-gradient(at 50% 0%, hsla(225,39%,25%,1) 0, transparent 50%), 
+          radial-gradient(at 100% 0%, hsla(339,49%,20%,1) 0, transparent 50%);
+        z-index: -1;
+      }
+
+      /* Advanced 3D Stage */
+      .tile-3d {
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      }
+      
+      /* Reduced jumpiness on touch */
+      .tile-3d:active {
+        transform: translateY(4px) scale(0.97);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
+
+      /* Glassmorphism Class */
+      .glass-blur {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(25px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* The Living Stage */
+      .alive-icon-stage {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+        perspective: 1200px;
+      }
+
+      /* Core Kinetic Motion */
+      @keyframes alive-kinetic {
+        0% { transform: translateZ(30px) rotateY(0deg) translateY(0px); }
+        25% { transform: translateZ(50px) rotateY(90deg) translateY(-8px) rotateX(5deg); }
+        50% { transform: translateZ(30px) rotateY(180deg) translateY(0px) rotateX(0deg); }
+        75% { transform: translateZ(50px) rotateY(270deg) translateY(8px) rotateX(-5deg); }
+        100% { transform: translateZ(30px) rotateY(360deg) translateY(0px); }
+      }
+
+      @keyframes ring-spin-major {
+        from { transform: rotateX(80deg) rotateZ(0deg); }
+        to { transform: rotateX(80deg) rotateZ(360deg); }
+      }
+
+      @keyframes ring-spin-minor {
+        from { transform: rotateY(70deg) rotateZ(0deg); }
+        to { transform: rotateY(70deg) rotateZ(360deg); }
+      }
+
+      @keyframes particle-fountain {
+        0% { transform: translateZ(-10px) translateY(20px) scale(0); opacity: 0; }
+        50% { opacity: 0.8; transform: translateZ(20px) translateY(0px) scale(1.2); }
+        100% { transform: translateZ(60px) translateY(-30px) scale(0); opacity: 0; }
+      }
+
+      @keyframes scanning-glow {
+        0% { top: -20%; }
+        100% { top: 120%; }
+      }
+
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes scale-up-subtle {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      .animate-fade-in-up {
+        animation: fade-in-up 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+
+      .animate-scale-up-subtle {
+        animation: scale-up-subtle 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+
+      .kinetic-core {
+        animation: alive-kinetic 8s infinite cubic-bezier(0.45, 0, 0.55, 1);
+        transform-style: preserve-3d;
+        filter: drop-shadow(0 0 15px var(--glow-color));
+      }
+
+      .orbital-halo-1 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border: 1px solid var(--glow-color);
+        border-radius: 50%;
+        opacity: 0.2;
+        animation: ring-spin-major 4s infinite linear;
+        transform-style: preserve-3d;
+      }
+
+      .orbital-halo-2 {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border: 2px dashed rgba(255,255,255,0.1);
+        border-radius: 50%;
+        animation: ring-spin-minor 6s infinite linear reverse;
+        transform-style: preserve-3d;
+      }
+
+      .digital-dust {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--glow-color);
+        border-radius: 50%;
+        animation: particle-fountain 3s infinite ease-out;
+        opacity: 0;
+      }
+
+      .scanline {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 20%;
+        background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+        pointer-events: none;
+        animation: scanning-glow 4s infinite linear;
+        z-index: 5;
+      }
+
+      .btn-extruded {
+        background: #fbbf24;
+        color: #020617;
+        padding: 16px;
+        border-radius: 24px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        box-shadow: 0 10px 0 #92400e, 0 20px 40px rgba(0,0,0,0.4);
+        transition: all 0.1s;
+        position: relative;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .btn-extruded:active {
+        top: 8px;
+        box-shadow: 0 2px 0 #92400e, 0 5px 10px rgba(0,0,0,0.2);
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="max-w-md mx-auto min-h-screen relative shadow-2xl">
+    <div class="mesh-bg"></div>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
